@@ -1,13 +1,13 @@
 {
-    "name": "note-taker",
+    "name": "note-taker-for-tacos",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Jason Sin",
-    "license": "ISC",
+    "author": "Vaughn Aubrey",
+    "license": "MIT",
     "dependencies": {
       "express": "^4.16.4",
       "uuid": "^8.3.2"

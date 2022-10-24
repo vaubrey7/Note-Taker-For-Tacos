@@ -22,8 +22,8 @@ const hide = (elem) => {
   elem.style.display = 'none';
 };
 
-// the activeNote here is used to keep track of the taco note in the taco textarea
-let activeNote = {};
+// the activeTacoNote here is used to keep track of the taco note in the taco textarea
+let activeTacoNote = {};
 
 // this retrieves the notes using the GET request
 const getNotes = () =>
@@ -51,14 +51,14 @@ const deleteNote = (id) =>
     },
   });
 // this displays all active notes in the list and allows editability depending on readonly status
-const renderActiveNote = () => {
+const renderactiveTacoNote = () => {
   hide(saveTacoNoteBtn);
 
-  if (activeNote.id) {
+  if (activeTacoNote.id) {
     tacoTitle.setAttribute('readonly', true);
     tacoText.setAttribute('readonly', true);
-    tacoTitle.value = activeNote.title;
-    tacoText.value = activeNote.text;
+    tacoTitle.value = activeTacoNote.title;
+    tacoText.value = activeTacoNote.text;
   } else {
     tacoTitle.removeAttribute('readonly');
     tacoText.removeAttribute('readonly');
@@ -74,38 +74,38 @@ const handleNoteSave = () => {
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
-    renderActiveNote();
+    renderactiveTacoNote();
   });
 };
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
-  // Prevents the click listener for the list from being called when the button inside of it is clicked
+  // Prevents the entire list from being deleted and only deletes the selected taco note 
   e.stopPropagation();
 
-  const note = e.target;
-  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  const tacoNote = e.target;
+  const tacoNoteId = JSON.parse(tacoNote.parentElement.getAttribute('taco-note')).id;
 
-  if (activeNote.id === noteId) {
-    activeNote = {};
+  if (activeTacoNote.id === tacoNoteId) {
+    activeTacoNote = {};
   }
 
-  deleteNote(noteId).then(() => {
+  deleteNote(tacoNoteId).then(() => {
     getAndRenderNotes();
-    renderActiveNote();
+    renderactiveTacoNote();
   });
 };
 
-// Sets the activeNote and displays it
-const handleNoteView = (e) => {
+// Sets the activeTacoNote and displays it
+const tacoNoteView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
-  renderActiveNote();
+  activeTacoNote = JSON.parse(e.target.parentElement.getAttribute('taco-note'));
+  renderactiveTacoNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeTacoNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
-  activeNote = {};
+  activeTacoNote = {};
   renderActiveNote();
 };
 
@@ -117,10 +117,10 @@ const handleRenderSaveBtn = () => {
   }
 };
 
-// Render a list of taco note titles
+// This Will Render a list of Taco Note Titles
 const rendertacoNoteList = async (notes) => {
   let jsonNotes = await notes.json();
-  if (window.location.pathname === '/notes') {
+  if (window.location.pathname === '/taconotes') {
     tacoNoteList.forEach((el) => (el.innerHTML = ''));
   }
 
@@ -134,7 +134,7 @@ const rendertacoNoteList = async (notes) => {
     const spanEl = document.createElement('span');
     spanEl.classList.add('list-item-title');
     spanEl.innerText = text;
-    spanEl.addEventListener('click', handleNoteView);
+    spanEl.addEventListener('click', tacoNoteView);
 
     liEl.append(spanEl);
 
@@ -156,25 +156,25 @@ const rendertacoNoteList = async (notes) => {
   };
 
   if (jsonNotes.length === 0) {
-    tacoNoteListItems.push(createLi('No saved Notes', false));
+    tacoNoteListItems.push(createLi('You Do Not Have Any Taco Notes', false));
   }
 
-  jsonNotes.forEach((note) => {
-    const li = createLi(note.title);
-    li.dataset.note = JSON.stringify(note);
+  jsonNotes.forEach((tacoNote) => {
+    const li = createLi(tacoNote.title);
+    li.dataset.note = JSON.stringify(tacoNote);
 
     tacoNoteListItems.push(li);
   });
 
-  if (window.location.pathname === '/notes') {
-    tacoNoteListItems.forEach((note) => tacoNoteList[0].append(note));
+  if (window.location.pathname === '/taconotes') {
+    tacoNoteListItems.forEach((tacoNote) => tacoNoteList[0].append(tacoNote));
   }
 };
 
 // creates the notes from the db and places them into the sidebar
 const getAndRenderNotes = () => getNotes().then(rendertacoNoteList);
 
-if (window.location.pathname === '/notes') {
+if (window.location.pathname === '/taconotes') {
   saveTacoNoteBtn.addEventListener('click', handleNoteSave);
   newTacoNoteBtn.addEventListener('click', handleNewNoteView);
   tacoTitle.addEventListener('keyup', handleRenderSaveBtn);
