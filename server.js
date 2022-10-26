@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('publictacos'));
 
 //this is the middleware for the static files
-app.use(express.static(path.join(__dirname, 'publictacos')));
+// app.use(express.static(path.join(__dirname, 'publictacos')));
 
 // this is the middleware for the routes
 app.use('/api/taconotes', require('./tacoroutes/apiRoutes'));

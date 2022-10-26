@@ -5,7 +5,7 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 
-const getPath = (name) => path.join(__dirname, '..', 'public', `${name}.html`);
+const getPath = (name) => path.join(__dirname, '..', 'publictacos', `${name}.html`);
 // GET NOTES PAGE //
 // request the notes page
 router.get('/taconotes', (req, res) => {

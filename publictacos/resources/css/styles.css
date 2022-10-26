@@ -11,21 +11,43 @@ html, body {
     background-color: #670505 !important;
   }
 
-  .save-taco-note {
+  /* .save-taco-note {
     display: none;
   }
-  
+   */
   .tacos i {
     margin-left: 15px;
     margin-right: 15px;
     font-size: 1.5rem;
-    cursor: crosshair;
+    cursor: pointer;
+  }
+  .taco-container i {
+    font-size: 1.1rem;
+    cursor: pointer;
   }
   
   .taco-textarea, .taco-title {
     color: #000000;
     width: 100%;
     outline: none;
+  }
+  
+  
+  .taco-title {
+    height: 50px;
+    margin-top: 13px;
+    font-size: 3rem;
+    border:hsl(208, 31%, 16%);
+    border:5px;
+    background-color: #000000;
+    color:white
+  }
+  
+  .taco-container .card {
+    height: calc(100vh - 70px);
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
   
   .taco-textarea {
@@ -38,30 +60,19 @@ html, body {
     font-size:1.5rem ;
   }
   
-  .taco-title {
-    height: 50px;
-    margin-top: 13px;
-    font-size: 3rem;
-    border:hsl(208, 31%, 16%);
-    border:5px;
-    background-color: #000000;
-    color:white
-  }
-  
-  .taco-title:read-only,
+ .taco-title:read-only,
   .taco-textarea:read-only {
-    color: #670505;
-  }
-  
-  .taco-container .card {
-    height: calc(100vh - 70px);
-    border-bottom: none;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    color: #d51111;
   }
   
   .taco-container {
     padding-left: 0;
+  }
+  
+  
+  .taco-item-title {
+    display: inline-block;
+    width: 75%;
   }
   
   .taco-container .taco-group,
@@ -70,16 +81,6 @@ html, body {
     border-top: none;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-  }
-  
-  .taco-item-title {
-    display: inline-block;
-    width: 75%;
-  }
-  
-  .taco-container i {
-    font-size: 1.1rem;
-    cursor: pointer;
   }
   
   .taco-container .taco-group-item {

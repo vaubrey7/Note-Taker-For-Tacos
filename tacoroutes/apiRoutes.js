@@ -11,6 +11,7 @@ router.post('/', (req, res) => {
     const newTitle = req.body.title;
     const newText = req.body.text;
     // adds warning that you must add a new title and text
+    console.log(newText, newTitle)
     if (!newTitle || !newText) {
         res.status(400).json({msg: 'You must enter both Title and Text for Best Taco Results.'})
     } else {

@@ -4,13 +4,13 @@ let saveTacoNoteBtn;
 let newTacoNoteBtn;
 let tacoNoteList;
 
-if (window.location.pathname === '/notes') {
+// if (window.location.pathname === '/taconotes') {
   tacoTitle = document.querySelector('.taco-title');
   tacoText = document.querySelector('.taco-textarea');
   saveTacoNoteBtn = document.querySelector('.save-taco-note');
-  newTacoNoteBtn = document.querySelector('.new-note');
+  newTacoNoteBtn = document.querySelector('.new-taco-note');
   tacoNoteList = document.querySelectorAll('.taco-container .taco-group');
-}
+// }
 
 // Shows the element and sets display to inline
 const show = (elem) => {
@@ -24,10 +24,10 @@ const hide = (elem) => {
 
 // the activeTacoNote here is used to keep track of the taco note in the taco textarea
 let activeTacoNote = {};
-
+console.log("it works)")
 // this retrieves the notes using the GET request
 const getNotes = () =>
-  fetch('/api/notes', {
+  fetch('/api/taconotes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const getNotes = () =>
   });
 // this saves the note you enter using a POST method 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+  fetch('/api/taconotes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const saveNote = (note) =>
   });
 //this can delete a note using the DELETE method
 const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
+  fetch(`/api/taconotes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -68,6 +68,7 @@ const renderactiveTacoNote = () => {
 };
 
 const handleNoteSave = () => {
+  console.log("handleNoteSave")
   const newNote = {
     title: tacoTitle.value,
     text: tacoText.value,
@@ -84,7 +85,9 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const tacoNote = e.target;
-  const tacoNoteId = JSON.parse(tacoNote.parentElement.getAttribute('taco-note')).id;
+  console.log(tacoNote)
+  const tacoNoteId = JSON.parse(tacoNote.parentElement.getAttribute("data-note")).id
+  console.log(tacoNoteId)
 
   if (activeTacoNote.id === tacoNoteId) {
     activeTacoNote = {};
@@ -99,14 +102,14 @@ const handleNoteDelete = (e) => {
 // Sets the activeTacoNote and displays it
 const tacoNoteView = (e) => {
   e.preventDefault();
-  activeTacoNote = JSON.parse(e.target.parentElement.getAttribute('taco-note'));
+  activeTacoNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
   renderactiveTacoNote();
 };
 
 // Sets the activeTacoNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeTacoNote = {};
-  renderActiveNote();
+  renderactiveTacoNote();
 };
 
 const handleRenderSaveBtn = () => {
