@@ -70,6 +70,7 @@ Routing tested and Completed Even if it gave me a gray hair or 2.
 ## Contribution  ##
 
 Feedback is appreciated!
+Some Collaberation with Jason Sin.
 
 
 ## Licensing  ##
@@ -77,7 +78,7 @@ Feedback is appreciated!
 See Heroku site regarding their own licensing policies: [https://www.heroku.com/policy/notices-and-license](https://www.heroku.com/policy/notices-and-license)
 
 Copyright &copy; 2022
-
+MIT
 
 ## Contact 🗨 ##
 
